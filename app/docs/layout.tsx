@@ -15,6 +15,9 @@ const nav = [
     { href: "/docs/slack", label: "Slack" },
     { href: "/docs/pagerduty", label: "PagerDuty" },
   ]},
+  { section: "FAQ", links: [
+    { href: "/docs/faq", label: "FAQ", },
+  ]},
   { section: "Contributing", links: [
     { href: "/docs/contributing", label: "How to contribute" },
     { href: "/docs/architecture", label: "Architecture" },

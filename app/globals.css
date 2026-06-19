@@ -1,15 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --cream: #F5F0EB;
-  --cream-dark: #EDE5D8;
-  --flame: #F97316;
-  --ink: #1A1A2E;
-  --purple: #7C3AED;
-  --teal: #0F6E56;
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --color-cream-50: #FDFAF6;
+  --color-cream-100: #F5F0EB;
+  --color-cream-200: #EDE5D8;
+
+  --color-flame-500: #F97316;
+  --color-flame-600: #EA6C0A;
+
+  --color-ink-900: #1A1A2E;
+  --color-ink-700: #2D2D4A;
+  --color-ink-500: #5A5A7A;
+  --color-ink-300: #9898B8;
+
+  --color-purple-500: #7C3AED;
+  --color-purple-100: #EDE9FE;
+
+  --color-teal-600: #0F6E56;
+  --color-teal-100: #E1F5EE;
 }
 
 * { box-sizing: border-box; }

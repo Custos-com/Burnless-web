@@ -1,19 +1,74 @@
 import Link from "next/link";
+import WaitlistFormClient from "./components/WaitlistForm";
 
 const features = [
-  { icon: "🎯", title: "SLO tracking", desc: "Define uptime targets in sre.yaml. Burnless tracks error budget in real time." },
-  { icon: "📈", title: "Burn rate detection", desc: "Alerts before your budget is gone. 14.4× rate = 2 days left." },
-  { icon: ">_", title: "Executable runbooks", desc: "Auto-scale pods, restart services. Steps defined in sre.yaml." },
-  { icon: "🔔", title: "Alerts & notifications", desc: "Slack and PagerDuty built in. Notify the right people at the right time." },
-  { icon: "🔄", title: "Auto remediation", desc: "Fix incidents before engineers are paged. Configurable semi-auto mode." },
-  { icon: "🔒", title: "Config as code", desc: "Every change is a PR. Full audit trail. Rollback in seconds." },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+      </svg>
+    ),
+    title: "SLO tracking",
+    desc: "Define uptime targets in sre.yaml. Burnless tracks error budget in real time.",
+    accent: "text-flame-500 bg-flame-500/10",
+  },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    ),
+    title: "Burn rate detection",
+    desc: "Alerts before your budget is gone. 14.4× rate = 2 days left.",
+    accent: "text-purple-500 bg-purple-100",
+  },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+      </svg>
+    ),
+    title: "Executable runbooks",
+    desc: "Auto-scale pods, restart services. Steps defined in sre.yaml.",
+    accent: "text-teal-600 bg-teal-100",
+  },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+      </svg>
+    ),
+    title: "Alerts & notifications",
+    desc: "Slack and PagerDuty built in. Notify the right people at the right time.",
+    accent: "text-flame-500 bg-flame-500/10",
+  },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+      </svg>
+    ),
+    title: "Auto remediation",
+    desc: "Fix incidents before engineers are paged. Configurable semi-auto mode.",
+    accent: "text-purple-500 bg-purple-100",
+  },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+      </svg>
+    ),
+    title: "Config as code",
+    desc: "Every change is a PR. Full audit trail. Rollback in seconds.",
+    accent: "text-teal-600 bg-teal-100",
+  },
 ];
 
 const steps = [
-  { step: "01", title: "Install", code: "brew install burnless" },
-  { step: "02", title: "Define your SLO", code: "burnless init" },
-  { step: "03", title: "Validate", code: "burnless validate" },
-  { step: "04", title: "Deploy & watch", code: "burnless agent" },
+  { title: "Install", code: "brew install burnless" },
+  { title: "Define your SLO", code: "burnless init" },
+  { title: "Validate", code: "burnless validate" },
+  { title: "Deploy", code: "burnless agent" },
 ];
 
 const comparisons = [
@@ -24,128 +79,194 @@ const comparisons = [
   { thing: "Incidents", before: "Engineer paged at 3am", after: "Auto-remediated before paging anyone" },
 ];
 
+const GH_ICON = (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+  </svg>
+);
+
+const ARROW = (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+    <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>
+);
+
 export default function HomePage() {
   return (
     <main className="pt-16">
 
-      {/* HERO */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-16">
-        <div className="flex flex-col lg:flex-row items-start gap-12">
-          <div className="flex-1 max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-white border border-[#EDE5D8] rounded-full px-4 py-1.5 mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#0F6E56] inline-block"></span>
-              <span className="text-xs text-[#5A5A7A]">v0.1.0 now available — open source</span>
+      {/* ── HERO ── */}
+      <section className="max-w-6xl mx-auto px-6 pt-24 pb-20">
+        <div className="flex flex-col lg:flex-row items-start gap-14">
+
+          {/* Left copy */}
+          <div className="flex-1 max-w-xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white border border-cream-200 rounded-full px-4 py-1.5 mb-8 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-600 inline-block animate-pulse"></span>
+              <span className="text-xs text-ink-500 font-medium">v0.1.0 now available — open source</span>
             </div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-[#1A1A2E] leading-tight tracking-tight mb-4">
+
+            <h1 className="text-5xl lg:text-[3.75rem] font-bold text-ink-900 leading-[1.08] tracking-tight mb-6">
               SRE automation<br/>
-              <span className="text-[#F97316]">before</span> alerts fire.
+              <span className="text-flame-500">before</span> alerts fire.
             </h1>
-            <p className="text-xl text-[#5A5A7A] leading-relaxed mb-3">
-              One <code className="text-[#7C3AED] bg-[#EDE9FE] px-1.5 py-0.5 rounded text-base font-mono">sre.yaml</code> file.
+
+            <p className="text-lg text-ink-500 leading-relaxed mb-8">
+              One{" "}
+              <code className="text-purple-500 bg-purple-100 px-1.5 py-0.5 rounded font-mono text-sm">sre.yaml</code>
+              {" "}file. Define everything. Automate anything.
             </p>
-            <p className="text-xl text-[#5A5A7A] leading-relaxed mb-8">
-              Define everything. Automate anything.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/docs/getting-started"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1A1A2E] text-white font-medium hover:bg-[#2D2D4A] transition-colors">
-                Get started free
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+
+            <div className="flex flex-col sm:flex-row gap-3 mb-10">
+              <Link
+                href="/docs/getting-started"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ink-900 text-cream-50 font-semibold hover:bg-ink-700 transition-colors text-sm"
+              >
+                Get started now {ARROW}
               </Link>
-              <a href="https://github.com/Custos-com/Burnless" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#EDE5D8] bg-white text-[#1A1A2E] font-medium hover:bg-[#F5F0EB] transition-colors">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                View on GitHub
+              <a
+                href="https://github.com/Custos-com/Burnless"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-cream-200 bg-white text-ink-900 font-semibold hover:bg-cream-100 transition-colors text-sm shadow-sm"
+              >
+                {GH_ICON} View on GitHub
               </a>
             </div>
-            <div className="flex items-center gap-6 mt-8">
-              <div className="flex items-center gap-1.5">
-                <span className="text-[#F97316] font-bold text-lg">32</span>
-                <span className="text-xs text-[#9898B8]">open issues</span>
-              </div>
-              <div className="w-px h-4 bg-[#EDE5D8]"></div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[#F97316] font-bold text-lg">Apache 2.0</span>
-                <span className="text-xs text-[#9898B8]">license</span>
-              </div>
-              <div className="w-px h-4 bg-[#EDE5D8]"></div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[#F97316] font-bold text-lg">Go</span>
-                <span className="text-xs text-[#9898B8]">built with</span>
-              </div>
+
+            {/* Stats bar */}
+            <div className="flex items-center gap-5">
+              {[
+                { value: "32", label: "open issues" },
+                { value: "Apache 2.0", label: "license" },
+                { value: "Go", label: "built with" },
+              ].map((stat, i, arr) => (
+                <div key={stat.label} className="flex items-center gap-5">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-sm font-bold text-flame-500">{stat.value}</span>
+                    <span className="text-xs text-ink-300">{stat.label}</span>
+                  </div>
+                  {i < arr.length - 1 && <div className="w-px h-4 bg-cream-200" />}
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* CODE BLOCK */}
-          <div className="flex-1 w-full max-w-lg">
-            <div className="code-block shadow-xl">
-              <div className="flex items-center gap-2 mb-4 pb-3 border-b border-[#2D3748]">
-                <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-                <span className="ml-2 text-[#6C7086] text-xs">sre.yaml</span>
+          {/* Code block */}
+          <div className="flex-1 w-full max-w-lg lg:pt-4">
+            <div className="rounded-2xl overflow-hidden shadow-2xl border border-[#1E293B]">
+              {/* Titlebar */}
+              <div className="bg-[#131825] flex items-center gap-2 px-4 py-3 border-b border-[#1E293B]">
+                <span className="w-3 h-3 rounded-full bg-[#FF5F56]"/>
+                <span className="w-3 h-3 rounded-full bg-[#FFBD2E]"/>
+                <span className="w-3 h-3 rounded-full bg-[#27C93F]"/>
+                <span className="ml-2 text-[#6C7086] text-xs font-mono">sre.yaml</span>
               </div>
-              <pre className="text-sm leading-relaxed whitespace-pre overflow-x-auto">{`<span class="key">service</span><span style="color:#cdd6f4">: </span><span class="val">payments-api</span>
-<span class="key">team</span><span style="color:#cdd6f4">: </span><span class="val">platform-engineering</span>
-
-<span class="key">slos</span><span style="color:#cdd6f4">:</span>
-  <span style="color:#cdd6f4">- </span><span class="key">name</span><span style="color:#cdd6f4">: </span><span class="val">availability</span>
-    <span class="key">target</span><span style="color:#cdd6f4">: </span><span class="num">99.9</span>
-    <span class="key">window</span><span style="color:#cdd6f4">: </span><span class="val">30d</span>
-
-<span class="key">error_budget</span><span style="color:#cdd6f4">:</span>
-  <span class="key">burn_rate_alerts</span><span style="color:#cdd6f4">:</span>
-    <span style="color:#cdd6f4">- </span><span class="key">rate</span><span style="color:#cdd6f4">: </span><span class="num">14.4x</span>
-      <span class="key">severity</span><span style="color:#cdd6f4">: </span><span class="val">critical</span>
-      <span class="key">remediate</span><span style="color:#cdd6f4">: </span><span class="val">scale-up</span>
-
-<span class="key">runbooks</span><span style="color:#cdd6f4">:</span>
-  <span class="key">scale-up</span><span style="color:#cdd6f4">:</span>
-    <span class="key">mode</span><span style="color:#cdd6f4">: </span><span class="val">auto</span>
-    <span class="key">steps</span><span style="color:#cdd6f4">:</span>
-      <span style="color:#cdd6f4">- </span><span class="str">kubectl scale deploy/payments</span>
-        <span class="str">  --replicas=+2</span>
-
-<span class="cmt"># Burnless detects → fixes → notifies</span>
-<span class="cmt"># No 3am pages.</span>`}</pre>
+              {/* Code */}
+              <div className="bg-[#1E293B] p-6 font-mono text-[13px] leading-[1.8] overflow-x-auto">
+                <pre
+                  dangerouslySetInnerHTML={{
+                    __html: [
+                      `<span style="color:#94E2D5">service</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">payments-api</span>`,
+                      `<span style="color:#94E2D5">team</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">platform-engineering</span>`,
+                      ``,
+                      `<span style="color:#94E2D5">slos</span><span style="color:#cdd6f4">:</span>`,
+                      `  <span style="color:#cdd6f4">- </span><span style="color:#94E2D5">name</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">availability</span>`,
+                      `    <span style="color:#94E2D5">target</span><span style="color:#cdd6f4">: </span><span style="color:#FAB387">99.9</span>`,
+                      `    <span style="color:#94E2D5">window</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">30d</span>`,
+                      ``,
+                      `<span style="color:#94E2D5">error_budget</span><span style="color:#cdd6f4">:</span>`,
+                      `  <span style="color:#94E2D5">burn_rate_alerts</span><span style="color:#cdd6f4">:</span>`,
+                      `    <span style="color:#cdd6f4">- </span><span style="color:#94E2D5">rate</span><span style="color:#cdd6f4">: </span><span style="color:#FAB387">14.4x</span>`,
+                      `      <span style="color:#94E2D5">severity</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">critical</span>`,
+                      `      <span style="color:#94E2D5">remediate</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">scale-up</span>`,
+                      ``,
+                      `<span style="color:#94E2D5">runbooks</span><span style="color:#cdd6f4">:</span>`,
+                      `  <span style="color:#94E2D5">scale-up</span><span style="color:#cdd6f4">:</span>`,
+                      `    <span style="color:#94E2D5">mode</span><span style="color:#cdd6f4">: </span><span style="color:#A6E3A1">auto</span>`,
+                      `    <span style="color:#94E2D5">steps</span><span style="color:#cdd6f4">:</span>`,
+                      `      <span style="color:#cdd6f4">- </span><span style="color:#F9E2AF">kubectl scale deploy/payments</span>`,
+                      `        <span style="color:#F9E2AF">  --replicas=+2</span>`,
+                      ``,
+                      `<span style="color:#6C7086"># Burnless detects → fixes → notifies</span>`,
+                      `<span style="color:#6C7086"># No 3am pages.</span>`,
+                    ].join("\n"),
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="bg-white border-y border-[#EDE5D8] py-20">
+      {/* ── WAITLIST: BURNLESS CLOUD ── */}
+      <section className="bg-cream-100 border-y border-cream-200 py-16">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="max-w-md">
+            <p className="text-xs font-semibold uppercase tracking-widest text-flame-500 mb-2">
+              Coming soon
+            </p>
+            <h2 className="text-2xl font-bold text-ink-900 mb-2 tracking-tight">
+              Burnless Cloud
+            </h2>
+            <p className="text-ink-500 text-sm leading-relaxed">
+              A hosted version of Burnless — no cluster to run, no infra to manage.
+              Join the waitlist to get early access.
+            </p>
+          </div>
+          <WaitlistFormClient />
+        </div>
+      </section>
+
+      {/* ── FEATURES ── */}
+      <section className="bg-white border-y border-cream-200 py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#9898B8] mb-4 text-center">Everything you need</p>
-          <h2 className="text-3xl font-bold text-[#1A1A2E] text-center mb-12">SRE as code, end to end</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p className="text-xs font-semibold uppercase tracking-widest text-ink-300 mb-3 text-center">
+            Everything you need
+          </p>
+          <h2 className="text-3xl font-bold text-ink-900 text-center mb-14">SRE as code, end to end</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((f) => (
-              <div key={f.title} className="bg-[#FDFAF6] border border-[#EDE5D8] rounded-xl p-6 hover:border-[#F97316]/40 transition-colors">
-                <div className="text-2xl mb-3">{f.icon}</div>
-                <h3 className="font-semibold text-[#1A1A2E] mb-2">{f.title}</h3>
-                <p className="text-sm text-[#5A5A7A] leading-relaxed">{f.desc}</p>
+              <div
+                key={f.title}
+                className="bg-cream-50 border border-cream-200 rounded-2xl p-6 hover:border-flame-500/30 hover:shadow-sm transition-all group"
+              >
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-4 ${f.accent}`}>
+                  {f.icon}
+                </div>
+                <h3 className="font-semibold text-ink-900 mb-1.5 text-sm">{f.title}</h3>
+                <p className="text-sm text-ink-500 leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* COMPARISON */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[#9898B8] mb-4 text-center">The problem</p>
-        <h2 className="text-3xl font-bold text-[#1A1A2E] text-center mb-12">Before and after Burnless</h2>
-        <div className="bg-white border border-[#EDE5D8] rounded-2xl overflow-hidden">
-          <div className="grid grid-cols-3 bg-[#F5F0EB] border-b border-[#EDE5D8]">
-            <div className="px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[#9898B8]"></div>
-            <div className="px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[#A32D2D] border-l border-[#EDE5D8]">Before</div>
-            <div className="px-6 py-3 text-xs font-semibold uppercase tracking-widest text-[#0F6E56] border-l border-[#EDE5D8]">With Burnless</div>
+      {/* ── COMPARISON ── */}
+      <section className="max-w-6xl mx-auto px-6 py-24">
+        <p className="text-xs font-semibold uppercase tracking-widest text-ink-300 mb-3 text-center">The problem</p>
+        <h2 className="text-3xl font-bold text-ink-900 text-center mb-14">Before and after Burnless</h2>
+        <div className="rounded-2xl overflow-hidden border border-cream-200 bg-white">
+          {/* Header */}
+          <div className="grid grid-cols-3 bg-cream-100 border-b border-cream-200">
+            <div className="px-5 py-3" />
+            <div className="px-5 py-3 border-l border-cream-200">
+              <span className="text-xs font-semibold uppercase tracking-widest text-red-400">Before</span>
+            </div>
+            <div className="px-5 py-3 border-l border-cream-200">
+              <span className="text-xs font-semibold uppercase tracking-widest text-teal-600">With Burnless</span>
+            </div>
           </div>
           {comparisons.map((row, i) => (
-            <div key={row.thing} className={`grid grid-cols-3 border-b border-[#EDE5D8] last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-[#FDFAF6]"}`}>
-              <div className="px-6 py-4 text-sm font-medium text-[#1A1A2E]">{row.thing}</div>
-              <div className="px-6 py-4 text-sm text-[#9898B8] border-l border-[#EDE5D8]">{row.before}</div>
-              <div className="px-6 py-4 text-sm text-[#1A1A2E] border-l border-[#EDE5D8] flex items-start gap-2">
-                <span className="text-[#0F6E56] mt-0.5 flex-shrink-0">✓</span>
+            <div
+              key={row.thing}
+              className={`grid grid-cols-3 border-b border-cream-200 last:border-0 ${i % 2 === 0 ? "bg-white" : "bg-cream-50"}`}
+            >
+              <div className="px-5 py-4 text-sm font-semibold text-ink-900">{row.thing}</div>
+              <div className="px-5 py-4 text-sm text-ink-300 border-l border-cream-200">{row.before}</div>
+              <div className="px-5 py-4 text-sm text-ink-700 border-l border-cream-200 flex items-start gap-2">
+                <span className="text-teal-600 mt-0.5 flex-shrink-0 font-bold">✓</span>
                 {row.after}
               </div>
             </div>
@@ -153,18 +274,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="bg-white border-y border-[#EDE5D8] py-20">
+      {/* ── HOW IT WORKS ── */}
+      <section className="bg-white border-y border-cream-200 py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#9898B8] mb-4 text-center">Get running in minutes</p>
-          <h2 className="text-3xl font-bold text-[#1A1A2E] text-center mb-12">Up and running in 4 steps</h2>
+          <p className="text-xs font-semibold uppercase tracking-widest text-ink-300 mb-3 text-center">
+            Get running in minutes
+          </p>
+          <h2 className="text-3xl font-bold text-ink-900 text-center mb-14">Up and running in 4 steps</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((s) => (
-              <div key={s.step} className="relative">
-                <div className="text-xs font-mono text-[#F97316] mb-3 font-bold">{s.step}</div>
-                <h3 className="font-semibold text-[#1A1A2E] mb-3">{s.title}</h3>
-                <div className="code-block text-sm py-3 px-4">
-                  <span className="text-[#94E2D5]">$</span> <span className="text-[#A6E3A1]">{s.code}</span>
+            {steps.map((s, i) => (
+              <div key={s.title} className="relative">
+                {/* Step number */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-7 h-7 rounded-full bg-ink-900 text-cream-50 text-xs font-bold flex items-center justify-center">
+                    {i + 1}
+                  </div>
+                  {/* Connector line */}
+                  {i < steps.length - 1 && (
+                    <div className="hidden lg:block flex-1 h-px bg-cream-200" />
+                  )}
+                </div>
+                <h3 className="font-semibold text-ink-900 mb-3 text-sm">{s.title}</h3>
+                <div className="bg-[#1E293B] rounded-xl py-3 px-4 font-mono text-[13px]">
+                  <span className="text-[#94E2D5]">$ </span>
+                  <span className="text-[#A6E3A1]">{s.code}</span>
                 </div>
               </div>
             ))}
@@ -172,43 +305,65 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* OPEN SOURCE BANNER */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="bg-[#1A1A2E] rounded-2xl p-10 md:p-16 text-center">
-          <div className="text-4xl mb-6">🔥</div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Free and open source. Forever.</h2>
-          <p className="text-[#9898B8] text-lg mb-8 max-w-xl mx-auto leading-relaxed">
-            CLI, agent, and Kubernetes operator are free under AGPLv3.
-            SSO, RBAC, and all features included. No paywalls on the core tool.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://github.com/Custos-com/Burnless" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-[#1A1A2E] font-medium hover:bg-[#F5F0EB] transition-colors">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              Star on GitHub
-            </a>
-            <Link href="/docs/getting-started"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#2D2D4A] text-white font-medium hover:bg-[#2D2D4A] transition-colors">
-              Read the docs
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </Link>
+      {/* ── OPEN SOURCE BANNER ── */}
+      <section className="max-w-6xl mx-auto px-6 py-24">
+        <div className="bg-ink-900 rounded-3xl px-10 py-16 md:px-20 text-center relative overflow-hidden">
+          {/* Subtle radial glow */}
+          <div className="absolute inset-0 pointer-events-none"
+            style={{background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(249,115,22,0.12) 0%, transparent 70%)"}}
+          />
+          <div className="relative">
+            <div className="inline-flex w-14 h-14 rounded-2xl bg-ink-700 items-center justify-center mb-6">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-flame-500">
+                <path d="M12 2C9 7 6 9 6 13a6 6 0 0012 0c0-4-3-6-6-11z" fill="currentColor"/>
+                <path d="M12 13c-1 2 0 4 2 4" stroke="#F5F0EB" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+              Free and open source. Forever.
+            </h2>
+            <p className="text-ink-300 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+              CLI, agent, and Kubernetes operator under AGPLv3.
+              SSO, RBAC, and all core features included. No paywalls.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a
+                href="https://github.com/Custos-com/Burnless"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-ink-900 font-semibold hover:bg-cream-100 transition-colors text-sm"
+              >
+                {GH_ICON} Star on GitHub
+              </a>
+              <Link
+                href="/docs/getting-started"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-ink-700 text-white font-semibold hover:bg-ink-700 transition-colors text-sm"
+              >
+                Read the docs {ARROW}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CONTRIBUTORS */}
-      <section className="max-w-6xl mx-auto px-6 pb-20">
+      {/* ── CONTRIBUTORS ── */}
+      <section className="max-w-6xl mx-auto px-6 pb-24">
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#9898B8] mb-4">Join the community</p>
-          <h2 className="text-3xl font-bold text-[#1A1A2E] mb-4">32 open issues ready for contributors</h2>
-          <p className="text-[#5A5A7A] mb-8 max-w-lg mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-widest text-ink-300 mb-3">Join the community</p>
+          <h2 className="text-3xl font-bold text-ink-900 mb-4">32 open issues ready for contributors</h2>
+          <p className="text-ink-500 mb-8 max-w-md mx-auto text-sm leading-relaxed">
             From good first issues to core infrastructure. Every contribution welcome.
           </p>
-          <a href="https://github.com/Custos-com/Burnless/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
-            target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-[#EDE5D8] bg-white text-[#1A1A2E] font-medium hover:bg-[#F5F0EB] transition-colors">
+          <a
+            href="https://github.com/Custos-com/Burnless/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cream-200 bg-white text-ink-900 font-semibold hover:bg-cream-100 transition-colors text-sm shadow-sm"
+          >
             Browse good first issues
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M7 17L17 7M7 7h10v10"/>
+            </svg>
           </a>
         </div>
       </section>
